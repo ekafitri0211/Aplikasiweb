@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #e6ecff, #f9fbff);
+  margin: 0;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  color: #004aad;
+  font-weight: 700;
+  margin-bottom: 25px;
+  font-size: 1.8em;
+}
+
+h3 {
+  margin-top: 0;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #004aad20;
+  color: #004aad;
+  font-weight: 600;
+}
+
+.form-section, .rectForm {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  padding: 20px;
+  margin-bottom: 25px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-section:hover, .rectForm:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+}
+
+label {
+  font-weight: 500;
+  display: block;
+  margin-top: 12px;
+  color: #333;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #004aad;
+  box-shadow: 0 0 0 3px rgba(0, 74, 173, 0.15);
+}
+
+button {
+  display: block;
+  width: 100%;
+  background: linear-gradient(135deg, #004aad, #0066ff);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin-top: 15px;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #00348a, #004aad);
+  transform: translateY(-2px);
+}
+
+.lainnya {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+  h2 {
+    font-size: 1.5em;
+  }
+}
+</style>
+</head>
+<body>
+<h2>Data Potensi - R02SUMBAGSEL</h2>
+<form id="myForm">
+<!-- PIC & Site Info -->
+ <h3 style="margin-top:0; padding-bottom:5px; border-bottom:2px solid #004aad20; color:#004aad; font-weight:600;">
+  Data Dibutuhkan untuk Pengisian Data Potensi
+</h3>
+<label>Nama PIC On Site:</label>
+<input name="namaPIC" required="" type="text"/>
+<label>Site ID:</label>
+<input id="siteID" name="siteID" required="" type="text"/>
+<label>Site Name:</label>
+<input id="siteName" name="siteName" readonly="" required="" type="text"/>
+<label>Activity:</label>
+<input name="activity" required="" type="text"/>
+<!-- EAS Mainfail -->
+<label>EAS Mainfail:</label>
+<select id="easSelect" name="easMainfail" required="">
+<option value="OK">OK</option>
+<option value="Yang Lain">Yang Lain</option>
+</select>
+<input class="lainnya" id="easLainInput" name="easMainfail_lain" placeholder="Jika pilih yang lain, sebutkan" type="text"/>
+<!-- Pilih Rectifier -->
+<label>Jumlah Rectifier:</label>
+<select id="rectifierSelect" name="jumlahRectifier" required="">
+  <option value="">--Pilih Jumlah--</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+</select>
+<br><br>
+
+<!-- RECTIFIER-1 -->
+<div class="rectForm" id="rect1Form" style="display:none;">
+<h3>RECTIFIER-1</h3>
+<label>A. Tipe Rectifier - 1 *</label>
+<select class="select-lainnya" name="rect1_tipe" data-required>
+  <option value="">--Pilih Tipe--</option>
+  <option value="HARIF">HARIF</option>
+  <option value="VERTIVE">VERTIVE</option>
+  <option value="EMERSON">EMERSON</option>
+  <option value="HUAWEI">HUAWEI</option>
+  <option value="ZTE">ZTE</option>
+  <option value="Lainnya">Yang lain</option>
+</select>
+<input class="lainnya" name="rect1_tipe_lain" placeholder="Jika pilih yang lain, sebutkan" type="text"/>
+<label>B. Status SC / NCU / LVD - Recti 1 *</label>
+<select class="select-lainnya" name="rect1_status" data-required>
+  <option value="">--Pilih Status--</option>
+  <option value="BAGUS">BAGUS</option>
+  <option value="Lainnya">Yang lain</option>
+</select>
+<input class="lainnya" name="rect1_status_lain" placeholder="Jika pilih yang lain, sebutkan problem" type="text"/>
+<label>C. Bus Voltage - Recti 1 *</label>
+<input type="number" lang="en" step="any" id="rect1_bus_voltage" name="rect1_bus_voltage" placeholder="Hanya boleh 0 - 300" min="0" max="300" data-required>
+<small id="rect1_bus_voltage_error" style="color:red; display:none;">Nilai hanya boleh 0 - 300</small>
+<label>D. Load Current - Recti 1 *</label>
+<input type="number" lang="en" step="any" id="rect1_load_current" name="rect1_load_current" placeholder="Hanya boleh 0 - 200" data-required>
+<small id="rect1_load_current_error" style="color:red; display:none;">Nilai hanya boleh antara 0 - 200</small>
+<label>E. Type Module - Recti 1 *</label>
+<select class="select-lainnya" name="rect1_type_module">
+<option value="">--Pilih Type Module--</option>
+<option value="ELTEK">ELTEK</option>
+<option value="VP2000">VP2000</option>
+<option value="PLATPACK">PLATPACK</option>
+<option value="INTERG">INTERG</option>
+<option value="APR 2G">APR 2G</option>
+<option value="APR 3G">APR 3G</option>
+<option value="APR ES">APR ES</option>
+<option value="VERTIVE">VERTIVE</option>
+<option value="R48-2000e3">R48-2000e3</option>
+<option value="ZTE R4850">ZTE R4850</option>
+<option value="EMERSON">EMERSON</option>
+<option value="HUAWEI">HUAWEI</option>
+<option value="Lainnya">Yang lain</option>
+</select>
+<input class="lainnya" name="rect1_type_module_lain" placeholder="Jika pilih yang lain, sebutkan" type="text"/>
+<label>F. Total Module Good - Recti 1 *</label>
+<input name="rect1_total_good" placeholder="Jika 0 ketik 0" type="number"/>
+<label>G. Total Module Faulty - Recti 1 *</label>
+<input name="rect1_total_faulty" placeholder="Jika 0 ketik 0" type="number"/>
+<label>H. Tipe Battery - Recti 1 *</label>
+<select class="select-lainnya" name="rect1_tipe_battery">
+<option value="">--Pilih Tipe Battery--</option>
+<option value="LITHIUM">LITHIUM</option>
+<option value="VLRA">VLRA</option>
+<option value="FLOATING">FLOATING</option>
+<option value="CDC">CDC</option>
+<option value="Lainnya">Yang lain</option>
+</select>
+<input class="lainnya" name="rect1_tipe_battery_lain" placeholder="Jika pilih yang lain, sebutkan" type="text"/>
+<label>I. Jumlah Battery - Recti 1 *</label>
+<input name="rect1_jumlah_battery" placeholder="Jumlah" type="number"/>
+<label>J. Jumlah Battery Good - Recti 1 *</label>
+<input name="rect1_jumlah_good" placeholder="Jumlah" type="number"/>
+<label>K. Jumlah Battery Faulty - Recti 1 *</label>
+<input name="rect1_jumlah_faulty" placeholder="Jumlah" type="number"/>
+<label>L. Jumlah Battery Degraded - Recti 1 *</label>
+<input name="rect1_jumlah_degraded" placeholder="Jumlah" type="number"/>
+</div>
+
+<!-- RECTIFIER-2 -->
+<div class="rectForm" id="rect2Form" style="display:none;">
+<h3>RECTIFIER-2</h3>
+<label>A. Tipe Rectifier - 2 *</label>
+<select class="select-lainnya" name="rect2_tipe" data-required>
+  <option value="">--Pilih Tipe--</option>
+  <option value="HARIF">HARIF</option>
+  <option value="VERTIVE">VERTIVE</option>
+  <option value="EMERSON">EMERSON</option>
+  <option value="HUAWEI">HUAWEI</option>
+  <option value="ZTE">ZTE</option>
+  <option value="Lainnya">Yang lain</option>
+</select>
+<input class="lainnya" name="rect2_tipe_lain" placeholder="Jika pilih yang lain, sebutkan" type="text"/>
+<label>B. Status SC / NCU / LVD - Recti 2 *</label>
+<select class="select-lainnya" name="rect2_status" data-required>
+  <option value="">--Pilih Status--</option>
+  <option value="BAGUS">BAGUS</option>
+  <option value="Lainnya">Yang lain</option>
+</select>
+<input class="lainnya" name="rect2_status_lain" placeholder="Jika pilih yang lain, sebutkan problem" type="text"/>
+<label>C. Bus Voltage - Recti 2 *</label>
+<input type="number" lang="en" step="any" id="rect2_bus_voltage" name="rect2_bus_voltage" placeholder="Hanya boleh 0 - 300" data-required>
+<small id="rect2_bus_voltage_error" style="color:red; display:none;">Nilai hanya boleh antara 0 - 300</small>
+<label>D. Load Current - Recti 2 *</label>
+<input type="number" lang="en" step="any" id="rect2_load_current" name="rect2_load_current" placeholder="Hanya boleh 0 - 200" data-required>
+<small id="rect2_load_current_error" style="color:red; display:none;">Nilai hanya boleh antara 0 - 200</small>
+<label>E. Type Module - Recti 2 *</label>
+<select class="select-lainnya" name="rect2_type_module">
+<option value="">--Pilih Type Module--</option>
+<option value="ELTEK">ELTEK</option>
+<option value="VP2000">VP2000</option>
+<option value="PLATPACK">PLATPACK</option>
+<option value="INTERG">INTERG</option>
+<option value="APR 2G">APR 2G</option>
+<option value="APR 3G">APR 3G</option>
+<option value="APR ES">APR ES</option>
+<option value="VERTIVE">VERTIVE</option>
+<option value="R48-2000e3">R48-2000e3</option>
+<option value="ZTE R4850">ZTE R4850</option>
+<option value="EMERSON">EMERSON</option>
+<option value="HUAWEI">HUAWEI</option>
+<option value="Lainnya">Yang lain</option>
+</select>
+<input class="lainnya" name="rect2_type_module_lain" placeholder="Jika pilih yang lain, sebutkan" type="text"/>
+<label>F. Total Module Good - Recti 2 *</label>
+<input name="rect2_total_good" placeholder="Jika 0 ketik 0" type="number"/>
+<label>G. Total Module Faulty - Recti 2 *</label>
+<input name="rect2_total_faulty" placeholder="Jika 0 ketik 0" type="number"/>
+<label>H. Tipe Battery - Recti 2 *</label>
+<select class="select-lainnya" name="rect2_tipe_battery">
+<option value="">--Pilih Tipe Battery--</option>
+<option value="LITHIUM">LITHIUM</option>
+<option value="VLRA">VLRA</option>
+<option value="FLOATING">FLOATING</option>
+<option value="CDC">CDC</option>
+<option value="Lainnya">Yang lain</option>
+</select>
+<input class="lainnya" name="rect2_tipe_battery_lain" placeholder="Jika pilih yang lain, sebutkan" type="text"/>
+<label>I. Jumlah Battery - Recti 2 *</label>
+<input name="rect2_jumlah_battery" placeholder="Jumlah" type="number"/>
+</div>
+
+<!-- INFORMASI PLN -->
+<div class="rectForm" id="plnForm" style="display:block;">
+<h3>INFORMASI PLN</h3>
+
+<label>Jumlah Phase KWh *</label>
+<select id="jumlahPhaseKWh" name="jumlahPhaseKWh" required>
+  <option value="">-- Pilih Jumlah Phase --</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+</select>
+
+<label>MCB KWh (Ampere) *</label>
+<input type="number" lang="en" step="any" id="mcbKwh" name="mcbKWh" placeholder="Hanya boleh 0 - 100" required>
+<small id="mcbKwh_error" style="color:red; display:none;">Nilai hanya boleh 0 - 100</small>
+
+<label>Tegangan Phase - R (Volt) *</label>
+<input type="number" lang="en" step="any" id="teganganR" name="teganganR" placeholder="Hanya boleh 0 - 300" required>
+<small id="teganganR_error" style="color:red; display:none;">Nilai hanya boleh 0 - 300</small>
+
+<label>Tegangan Phase - S (Volt) *</label>
+<input type="number" lang="en" step="any" id="teganganS" name="teganganS" placeholder="Hanya boleh 0 - 300" required>
+<small id="teganganS_error" style="color:red; display:none;">Nilai hanya boleh 0 - 300</small>
+
+<label>Tegangan Phase - T (Volt) *</label>
+<input type="number" lang="en" step="any" id="teganganT" name="teganganT" placeholder="Hanya boleh 0 - 300" required>
+<small id="teganganT_error" style="color:red; display:none;">Nilai hanya boleh 0 - 300</small>
+
+<label>Arus Phase - R (Ampere) *</label>
+<input type="number" lang="en" step="any" id="arusR" name="arusR" placeholder="Hanya boleh 0 - 200" required>
+<small id="arusR_error" style="color:red; display:none;">Nilai hanya boleh 0 - 200</small>
+
+<label>Arus Phase - S (Ampere) *</label>
+<input type="number" lang="en" step="any" id="arusS" name="arusS" placeholder="Hanya boleh 0 - 200" required>
+<small id="arusS_error" style="color:red; display:none;">Nilai hanya boleh 0 - 200</small>
+
+<label>Arus Phase - T (Ampere) *</label>
+<input type="number" lang="en" step="any" id="arusT" name="arusT" placeholder="Hanya boleh 0 - 200" required>
+<small id="arusT_error" style="color:red; display:none;">Nilai hanya boleh 0 - 200</small>
+
+<label>Additional Info *</label>
+<input name="additionalInfo" required type="text"/>
+</div>
+
+<!-- AKSES & INFO SITE -->
+<div class="rectForm" id="aksesForm" style="display:block;">
+<h3>AKSES &amp; INFO SITE</h3>
+<label>Akses Jalan ke Site *</label>
+<select id="aksesJalanSelect" name="aksesJalan" required="">
+<option value="">--Pilih Akses--</option>
+<option value="Normal">Normal</option>
+<option value="Butuh 4WD">Butuh 4 WD</option>
+<option value="Yang Lain">Yang lain</option>
+</select>
+<input class="lainnya" id="aksesJalanLainInput" name="aksesJalan_lain" placeholder="Jika pilih yang lain, sebutkan" type="text"/>
+<label>Potensi Kendala Akses Jalan ke Site *</label>
+<select id="kendalaAksesSelect" name="kendalaAkses" required="">
+<option value="">--Pilih Kendala--</option>
+<option value="Tidak ada">Tidak ada</option>
+<option value="Potensi jalan banjir">Potensi jalan banjir</option>
+<option value="Harus dengan kendaraan 4WD saat hujan">Harus dengan kendaraan 4WD saat hujan</option>
+<option value="Yang Lain">Yang lain</option>
+</select>
+<input class="lainnya" id="kendalaAksesLainInput" name="kendalaAkses_lain" placeholder="Jika pilih yang lain, sebutkan" type="text"/>
+<label>Penjaga Site *</label>
+<select id="penjagaSiteSelect" name="penjagaSite" required="">
+<option value="">--Pilih Penjaga--</option>
+<option value="Ada">Ada</option>
+<option value="Tidak Ada">Tidak Ada</option>
+<option value="Yang Lain">Yang lain</option>
+</select>
+</div>
+<button type="submit">Kirim</button>
+</form>
+
+<!-- Popup sukses -->
+<div id="popupSukses" style="
+  display:none; 
+  position: fixed; 
+  top:0; left:0; right:0; bottom:0; 
+  background: rgba(0,0,0,0.6); 
+  justify-content: center; 
+  align-items: center;">
+  
+  <div style="background:#fff; padding:20px; border-radius:10px; text-align:center; max-width:300px; width:90%;">
+    <h3>✅ Data Berhasil Dikirim!</h3>
+    <p>Kode unik Anda:</p>
+    <input type="text" id="kodeUnik" readonly style="text-align:center; font-weight:bold;">
+    <br><br>
+    <button onclick="copyKode()">📋 Salin Kode</button>
+    <button onclick="tutupPopup()">❌ Tutup</button>
+  </div>
+</div>
+
+<script>
+// Ambil Site Name berdasarkan Site ID
+const siteDataURL = "https://script.google.com/macros/s/AKfycbzfF3FZMrvzHHE1vXVMjoSWKgFRy022W9nJCGSDK44rueSQvklEiZiGnFuqdHAMO-vE/exec";
+let siteMap = {};
+fetch(siteDataURL)
+  .then(res => res.json())
+  .then(data => { siteMap = data; })
+  .catch(err => console.error("Gagal load site data:", err));
+
+const siteIDInput = document.getElementById("siteID");
+const siteNameInput = document.getElementById("siteName");
+
+// Tambah elemen pesan error
+const siteError = document.createElement("small");
+siteError.style.color = "red";
+siteError.style.display = "none";
+siteError.textContent = "⚠️ Site ID tidak terdaftar!";
+siteIDInput.insertAdjacentElement("afterend", siteError);
+
+siteIDInput.addEventListener("input", function() {
+  const siteID = this.value.toUpperCase();
+  if (siteMap[siteID]) {
+    siteNameInput.value = siteMap[siteID];
+    siteError.style.display = "none";  // sembunyikan pesan
+  } else {
+    siteNameInput.value = "";
+    if (siteID !== "") {
+      siteError.style.display = "block"; // tampilkan pesan
+    } else {
+      siteError.style.display = "none"; // kosong → jangan tampil
+    }
+  }
+});
+
+// Pilih Rectifier
+const rectSelect = document.getElementById("rectifierSelect");
+const rect1Form = document.getElementById("rect1Form");
+const rect2Form = document.getElementById("rect2Form");
+
+function setRequired(form, active) {
+  form.querySelectorAll("[data-required]").forEach(el => {
+    el.required = active;
+  });
+}
+
+rectSelect.addEventListener("change", function() {
+  if (this.value === "1") {
+    rect1Form.style.display = "block";
+    rect2Form.style.display = "none";
+    setRequired(rect1Form, true);
+    setRequired(rect2Form, false);
+  } else if (this.value === "2") {
+    rect1Form.style.display = "block";
+    rect2Form.style.display = "block";
+    setRequired(rect1Form, true);
+    setRequired(rect2Form, true);
+  } else {
+    rect1Form.style.display = "none";
+    rect2Form.style.display = "none";
+    setRequired(rect1Form, false);
+    setRequired(rect2Form, false);
+  }
+});
+
+// fungsi validasi bus voltage
+ function validateRange(inputId, errorId, min, max) {
+    const input = document.getElementById(inputId);
+    const error = document.getElementById(errorId);
+
+    input.addEventListener("input", function() {
+      const value = parseFloat(input.value);
+
+      if (isNaN(value) || value < min || value > max) {
+        error.style.display = "block";   // tampilkan pesan error
+        input.style.borderColor = "red"; // kasih border merah
+      } else {
+        error.style.display = "none";    // sembunyikan pesan
+        input.style.borderColor = "";    // reset border
+      }
+    });
+  }
+
+  // Recti 1
+  validateRange("rect1_bus_voltage", "rect1_bus_voltage_error", 0, 300);
+  validateRange("rect1_load_current", "rect1_load_current_error", 0, 200);
+
+  // Recti 2
+  validateRange("rect2_bus_voltage", "rect2_bus_voltage_error", 0, 300);
+  validateRange("rect2_load_current", "rect2_load_current_error", 0, 200);
+
+  // Validasi untuk PLN (seperti bus voltage & load current)
+validateRange("mcbKwh", "mcbKwh_error", 0, 100);
+
+validateRange("teganganR", "teganganR_error", 0, 300);
+validateRange("teganganS", "teganganS_error", 0, 300);
+validateRange("teganganT", "teganganT_error", 0, 300);
+
+validateRange("arusR", "arusR_error", 0, 200);
+validateRange("arusS", "arusS_error", 0, 200);
+validateRange("arusT", "arusT_error", 0, 200);
+
+// Handle input "Yang lain" untuk rectifier
+document.querySelectorAll('.select-lainnya').forEach(select => {
+  select.addEventListener('change', function() {
+    const lainInput = this.nextElementSibling;
+    if (this.value === "Lainnya") {
+      lainInput.style.display = "block";
+      lainInput.required = true;
+    } else {
+      lainInput.style.display = "none";
+      lainInput.required = false;
+    }
+  });
+});
+
+// Handle input "Yang Lain" untuk EAS Mainfail
+const easSelect = document.getElementById("easSelect");
+const easLainInput = document.getElementById("easLainInput");
+easSelect.addEventListener('change', function() {
+  if (this.value === "Yang Lain") {
+    easLainInput.style.display = "block";
+    easLainInput.required = true;
+  } else {
+    easLainInput.style.display = "none";
+    easLainInput.required = false;
+  }
+});
+
+// Handle input "Yang Lain" untuk Akses & Info Site
+const aksesJalanSelect = document.getElementById("aksesJalanSelect");
+const aksesJalanLainInput = document.getElementById("aksesJalanLainInput");
+aksesJalanSelect.addEventListener('change', function() {
+  if(this.value === "Yang Lain") {
+    aksesJalanLainInput.style.display = "block";
+    aksesJalanLainInput.required = true;
+  } else {
+    aksesJalanLainInput.style.display = "none";
+    aksesJalanLainInput.required = false;
+  }
+});
+
+const kendalaAksesSelect = document.getElementById("kendalaAksesSelect");
+const kendalaAksesLainInput = document.getElementById("kendalaAksesLainInput");
+kendalaAksesSelect.addEventListener('change', function() {
+  if(this.value === "Yang Lain") {
+    kendalaAksesLainInput.style.display = "block";
+    kendalaAksesLainInput.required = true;
+  } else {
+    kendalaAksesLainInput.style.display = "none";
+    kendalaAksesLainInput.required = false;
+  }
+});
+
+const penjagaSiteSelect = document.getElementById("penjagaSiteSelect");
+const penjagaSiteLainInput = document.getElementById("penjagaSiteLainInput");
+penjagaSiteSelect.addEventListener('change', function() {
+  if(this.value === "Yang Lain") {
+    penjagaSiteLainInput.style.display = "block";
+    penjagaSiteLainInput.required = true;
+  } else {
+    penjagaSiteLainInput.style.display = "none";
+    penjagaSiteLainInput.required = false;
+  }
+});
+
+// Submit form ke Google Apps Script
+const submitURL = "https://script.google.com/macros/s/AKfycbygPznOi26WDRmrEtTRaw8NmfMIAGEZrwIMWZOz9SXaIitZvnbqm-hLGPoenVmpJxY1/exec";
+
+document.getElementById("myForm").addEventListener("submit", e => {
+  e.preventDefault();
+  let formData = new FormData(e.target);
+
+  // Ganti value select "Lainnya" rectifier dengan value input
+  document.querySelectorAll('.select-lainnya').forEach(select => {
+    const inputLain = select.nextElementSibling;
+    if(select.value === "Lainnya") {
+      formData.set(select.name, inputLain.value);
+    }
+  });
+
+  // Ganti value EAS Mainfail jika pilih "Yang Lain"
+  if (easSelect.value === "Yang Lain") {
+    formData.set('easMainfail', easLainInput.value);
+  }
+
+  // Ganti value Akses & Info Site jika pilih "Yang Lain"
+  if (aksesJalanSelect.value === "Yang Lain") {
+    formData.set('aksesJalan', aksesJalanLainInput.value);
+  }
+  if (kendalaAksesSelect.value === "Yang Lain") {
+    formData.set('kendalaAkses', kendalaAksesLainInput.value);
+  }
+  if (penjagaSiteSelect.value === "Yang Lain") {
+    formData.set('penjagaSite', penjagaSiteLainInput.value);
+  }
+
+  let data = {};
+  formData.forEach((value, key) => { data[key] = value });
+
+  fetch(submitURL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(res => {
+    if(res.status === "success") {
+
+    // tampilkan popup
+        document.getElementById("kodeUnik").value = res.kode;
+        document.getElementById("popupSukses").style.display = "flex";
+      } else {
+        alert("❌ Gagal mengirim data: " + res.message);
+      }
+    e.target.reset();
+    rect1Form.style.display = "none";
+    rect2Form.style.display = "none";
+    document.querySelectorAll('.lainnya').forEach(input => {
+      input.style.display = "none";
+      input.required = false;
+    });
+  })
+  .catch(err => console.error(err));
+});
+
+// Ganti koma menjadi titik di semua input number
+document.querySelectorAll('input[type="number"]').forEach(input => {
+  input.addEventListener("input", function() {
+    if (this.value.includes(",")) {
+      this.value = this.value.replace(/,/g, ".");
+    }
+  });
+});
+
+// Fungsi salin kode
+  function copyKode() {
+    let kodeInput = document.getElementById("kodeUnik");
+    kodeInput.select();
+    kodeInput.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    alert("📋 Kode unik berhasil disalin: " + kodeInput.value);
+  }
+
+  // Tutup popup
+  function tutupPopup() {
+    document.getElementById("popupSukses").style.display = "none";
+  }
+</script>
+</body>
+</html>
